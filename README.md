@@ -39,7 +39,52 @@ three instances of a `Human`, then create an array called people of type [`Human
 Create a new array called sortedPeople of type [`Human`] that is the people array sorted by age.
 
 </br> </br>
+```
 
+class Human: CustomStringConvertible, Equatable, Comparable {
+    static func < (lhs: Human, rhs: Human) -> Bool {
+        return lhs.age < rhs.age
+    }
+    
+    static func == (lhs: Human, rhs: Human) -> Bool {
+        return lhs.age > rhs.age
+    }
+    
+    var description: String {
+      return "Human name is \(name) and is \(age) years old."
+    }
+    
+    var name: String
+    var age: Int
+    
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+}
+
+// 1b.
+let human1 = Human(name: "human1", age: 21)
+let human2 = Human(name: "human2", age: 22)
+
+print(human1)
+print(human2)
+
+// 1c.
+if human1 == human2 {
+    print("same person👨🏻👨🏻")
+} else if human1 != human2 {
+    print("These humans be different 👨🏻👩🏻")
+}
+
+//1d.
+
+if human1 > human2 {
+    print("human1 is older")
+} else {
+    print("human2 is older")
+}
+```
 
 ## Question 2
 
@@ -57,6 +102,39 @@ then call drive().
 
 </br> </br>
 
+```
+//2a.
+protocol Vehicle {
+    var numberOfWheels: Int {get}
+    func drive()
+}
+
+struct Car: Vehicle {
+    var numberOfWheels: Int = 4
+    func drive() {
+        print("Vroom, Vroom")
+    }
+}
+
+//2b.
+var car = Car()
+car.numberOfWheels
+car.drive()
+
+// 2c.
+
+struct Bike: Vehicle {
+    var numberOfWheels: Int = 2
+    func drive() {
+        print("Begin padaling!")
+    }
+}
+
+var bike = Bike()
+bike.numberOfWheels
+bike.drive()
+```
+
 
 ## Question 3
 // Given the below two protocols, create a struct for penguin(a flightless bird) and an eagle.
@@ -73,6 +151,23 @@ protocol Flyable {
  var airspeedVelocity: Double { get }
 }
 ```
+```
+
+struct penguin: Bird {
+    var name = "Penguin"
+    var canFly = false
+}
+
+
+struct eagle: Bird, Flyable {  // adding more than one protocol to eagle
+    var airspeedVelocity = 20.0
+    var name = "Eagle"
+    var canFly = true
+}
+
+```
+
+
 
 </br> </br>
 
@@ -96,6 +191,31 @@ var bruceBanner = SuperHero.notHulk
 bruceBanner.transform() . // hulk
 
 bruceBanner.transform()  // notHulk
+```
+
+```\protocol Transformation  {
+    mutating func transformation()
+}
+
+
+enum SuperHero: Transformation {
+    mutating func transformation() {
+        switch self {
+        case.hulk:
+            self = .notHulk
+        case.notHulk:
+            self = .hulk
+        }
+    }
+    case hulk
+    case notHulk
+}
+
+var bruceBanner = SuperHero.notHulk
+
+bruceBanner.transformation()  // hulk
+
+bruceBanner.transformation()  // notHulk
 ```
 
 </br> </br>
