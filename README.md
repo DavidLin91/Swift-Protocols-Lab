@@ -237,6 +237,42 @@ f. Put an instance of each of your classes in an array.
 
 g. Iterate over the array and have them print their `message` property
 
+```
+protocol Communication {
+    var message: String {get}
+}
+
+class Cow: Communication {
+    var message: String {
+        return "mooooo"
+    }
+}
+
+class Dog: Communication {
+    var message: String {
+        return "wooof"
+}
+}
+    
+class Cat: Communication {
+    var message: String {
+        return "meowww"
+    }
+}
+
+    var cow = Cow.init().message
+    var dog = Dog.init().message
+    var cat = Cat.init().message
+    
+    var animalArray = [cow, dog, cat]
+
+    for animalNoise in animalArray {
+    print(animalNoise)
+}
+    
+
+```
+
 
 ## Question 6
 
